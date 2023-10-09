@@ -7,9 +7,15 @@ const thoughtSchema = new mongoose.Schema({
     reactions: {}
 });
 
+thoughtSchema.reactions.virtual('reactionCount').get(() => {
+    
+})
+
 const reactionSchema = new mongoose.Schema({
     reactionId: {type: Schema.Types.ObjectId, default: ObjectId()},
     reactionBody: {type: string, required: true, max: 280},
     username: {type: string, required: true},
-    createdAt: {type: Date, default: Date.now()},
+    createdAt: {type: Date, default: Date.now},
 });
+
+const thoughts = mongoose.model('thoughts', thoughtSchema);
