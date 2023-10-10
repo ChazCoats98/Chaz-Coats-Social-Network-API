@@ -28,9 +28,18 @@ module.exports = {
     },
     async updateThought(req, res) {
         try {
-            const updateThought = await Thought.FindOneAndUpdate({_id: req.params.id}, {thoughtText: req.body})
+            const updateThoughtData = await Thought.FindOneAndUpdate({_id: req.params.id}, {thoughtText: req.body})
+            res.json(updateThoughtData);
         } catch (err) {
             res.status(500).json(err);
         }
     },
+    async deleteThought(req, res) {
+        try {
+            const thoughtEraser = await Thought.FindOneAndDelete({_id: req.params.id})
+            res.json(thoughtEraser);
+        } catch (err) {
+            res.status(500).json(err);
+        }
+    }
 }
