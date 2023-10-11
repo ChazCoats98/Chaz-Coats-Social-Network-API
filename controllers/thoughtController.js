@@ -3,7 +3,7 @@ const Thought = require('../models/thought');
 module.exports = {
     async getThoughts(req, res) {
         try {
-            const thoughts = await Thought.find();
+            const thoughts = await Thought.find().populate('reactions');
             res.json(thoughts);
         } catch (err) {
             res.status(500).json(err);
@@ -11,7 +11,7 @@ module.exports = {
     },
     async getOneThought(req, res) {
         try {
-            const oneThought = await Thought.findOne({_id: req.params.id});
+            const oneThought = await Thought.findOne({_id: req.params.id}).populate('reactions');
             res.json(oneThought);
         } catch (err) {
             res.status(500).json(err);
@@ -43,7 +43,7 @@ module.exports = {
     },
     async createReaction(req, res) {
         try {
-            const reactionBuilder = await Thought.FindOneAndUpdate({_id: req.params.thoughtId})
+            const reactionBuilder = await Thought.FindOneAndUpdate({_id: req.params.thoughtId}).populate('reactions');
         } catch (err) {
             res.status(500).json(err);
         }
