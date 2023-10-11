@@ -26,5 +26,13 @@ module.exports = {
         } catch (err) {
             res.status(500).json(err);
         }
+    },
+    async deleteUser(req, res) {
+        try {
+            const userEraser = await User.FindOneAndDelete({ _id: req.params.userId });
+            res.json(userEraser);
+        } catch (err) {
+            res.status(500).json(err);
+        }
     }
 }
