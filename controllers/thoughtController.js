@@ -1,5 +1,4 @@
 const Thought = require('../models/thought');
-const user = require('../models/user');
 
 module.exports = {
     async getThoughts(req, res) {
@@ -41,5 +40,19 @@ module.exports = {
         } catch (err) {
             res.status(500).json(err);
         }
-    }
+    },
+    async createReaction(req, res) {
+        try {
+            const reactionBuilder = await Thought.FindOneAndUpdate({_id: req.params.thoughtId})
+        } catch (err) {
+            res.status(500).json(err);
+        }
+    },
+    async deleteReaction(req, res) {
+        try {
+            const reactionEraser = await reaction.FindOneAndDelete({_id: req.params.thoughtId})
+        } catch (err) {
+            res.status(500).json(err);
+        }
+    },
 }
