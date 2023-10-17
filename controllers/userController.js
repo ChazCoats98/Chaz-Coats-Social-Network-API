@@ -3,7 +3,7 @@ const User = require('../models/user');
 module.exports = {
     async getUsers(req, res) {
         try {
-            const users = await User.find().populate('thoughts').populate('friends');
+            const users = await User.find();
             res.json(users);
         } catch (err) {
             res.status(500).json(err);
@@ -12,7 +12,7 @@ module.exports = {
     },
     async getOneUser(req, res) {
         try {
-            const user = await User.findOne({ _id: req.params.userId }).populate('thoughts').populate('friends');
+            const user = await User.findOne({ _id: req.params.userId }).select('-__v').populate('thoughts').populate('friends');
             res.json(user);
         } catch (err) {
             res.status(500).json(err);

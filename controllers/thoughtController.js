@@ -11,7 +11,7 @@ module.exports = {
     },
     async getOneThought(req, res) {
         try {
-            const oneThought = await Thought.findOne({_id: req.params.thoughtId}).populate('reactions');
+            const oneThought = await Thought.findOne({_id: req.params.thoughtId}).select('-__v').populate('reactions');
             res.json(oneThought);
         } catch (err) {
             res.status(500).json(err);
