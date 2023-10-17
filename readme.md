@@ -4,9 +4,13 @@
 
   ## Table of Contents
   [Description](#description)
+  <br/>
   [Installation](#installation)
+  <br/>
   [Usage](#usage)
+  <br/>
   [Contributing](#contributing)
+  <br/>
   [questions](#questions)
 
 
@@ -32,6 +36,11 @@
   N/A
 
   ## Demonstration
+  [Untitled_ Oct 17, 2023 1_25 PM.webm](https://github.com/ChazCoats98/Chaz-Coats-Social-Network-API/assets/134428862/9f57081f-0ceb-4558-bf18-5075bc4b7686)
+  <br/>
+  [Untitled_ Oct 17, 2023 2_03 PM.webm](https://github.com/ChazCoats98/Chaz-Coats-Social-Network-API/assets/134428862/8314bdef-4bbf-4845-a0ab-62b11382cd2b)
+
+
 
   ## Questions
   To view my GitHub profile, visit [GitHub] (https://github.com/ChazCoats98).
