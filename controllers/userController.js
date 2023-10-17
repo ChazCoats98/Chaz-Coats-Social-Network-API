@@ -4,7 +4,7 @@ module.exports = {
     //queries DB for all user data then displays in JSON format
     async getUsers(req, res) {
         try {
-            const users = await User.find().populate('thoughts').populate('reactions');
+            const users = await User.find().populate('thoughts').populate('friends');
             res.json(users);
         } catch (err) {
             res.status(500).json(err);
@@ -14,7 +14,7 @@ module.exports = {
     async getOneUser(req, res) {
         //cant get thoughts or reactions to populate.
         try {
-            const user = await User.findOne({ _id: req.params.userId }).populate('thoughts').populate('reactions');
+            const user = await User.findOne({ _id: req.params.userId }).populate('thoughts').populate('friends');
             res.json(user);
         } catch (err) {
             res.status(500).json(err);

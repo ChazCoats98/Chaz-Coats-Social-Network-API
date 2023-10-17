@@ -1,4 +1,5 @@
 const Thought = require('../models/thought');
+User = require('../models/user');
 
 module.exports = {
     async getThoughts(req, res) {
@@ -11,7 +12,7 @@ module.exports = {
     },
     async getOneThought(req, res) {
         try {
-            const oneThought = await Thought.findOne({_id: req.params.thoughtId}).select('-__v').populate('reactions');
+            const oneThought = await Thought.findOne({_id: req.params.thoughtId}).populate('reactions');
             res.json(oneThought);
         } catch (err) {
             res.status(500).json(err);
@@ -20,6 +21,7 @@ module.exports = {
     async newThought(req, res) {
         try{
             const thoughtData = await Thought.create(req.body);
+            const addThoughtToUser = await User.findOneAndUpdate({_id:req.body.userId}, { $push: {thoughts: thoughtData._id}}, {new: true});
             res.json(thoughtData);
         } catch (err) {
             res.status(500).json(err);
@@ -28,7 +30,7 @@ module.exports = {
     },
     async updateThought(req, res) {
         try {
-            const updateThoughtData = await Thought.FindOneAndUpdate({_id: req.params.thoughtId}, {thoughtText: req.body})
+            const updateThoughtData = await Thought.findOneAndUpdate({_id: req.params.thoughtId}, {$set: req.body}, {runValidators: true, new: true});
             res.json(updateThoughtData);
         } catch (err) {
             res.status(500).json(err);
@@ -36,7 +38,7 @@ module.exports = {
     },
     async deleteThought(req, res) {
         try {
-            const thoughtEraser = await Thought.FindOneAndDelete({_id: req.params.thoughtId})
+            const thoughtEraser = await Thought.findOneAndDelete({_id: req.params.thoughtId})
             res.json(thoughtEraser);
         } catch (err) {
             res.status(500).json(err);
@@ -44,7 +46,7 @@ module.exports = {
     },
     async createReaction(req, res) {
         try {
-            const reactionBuilder = await Thought.FindOneAndUpdate({_id: req.params.thoughtId}).populate('reactions');
+            const reactionBuilder = await Thought.findOneAndUpdate({_id: req.params.thoughtId}, { $push: { reactions: req.body}}, {runValidators: true, new: true});
             res.json(reactionBuilder);
         } catch (err) {
             res.status(500).json(err);
@@ -52,7 +54,7 @@ module.exports = {
     },
     async deleteReaction(req, res) {
         try {
-            const reactionEraser = await reaction.FindOneAndDelete({_id: req.params.thoughtId});
+            const reactionEraser = await reaction.findOneAndDelete({_id: req.params.thoughtId}, { $pull: { reactions: { reactionId: req.params.reactionId}}}, { new: true });
             res.json(reactionEraser);
         } catch (err) {
             res.status(500).json(err);
