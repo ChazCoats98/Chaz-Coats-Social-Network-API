@@ -21,6 +21,7 @@ module.exports = {
             console.log(err);
         }
     },
+    //creates user (remember to input username and email)
     async newUser(req, res) {
         try {
             const userData = await User.create(req.body);
@@ -29,6 +30,7 @@ module.exports = {
             res.status(500).json(err);
         }
     },
+    //updates user
     async updateUser(req, res) {
         try {
             const updatedUser = await User.findOneAndUpdate({ _id: req.params.userId}, { $set: req.body }, { runValidators: true, new: true});
@@ -37,6 +39,7 @@ module.exports = {
             res.status(500).json(err);
         }
     },
+    //deletes user 
     async deleteUser(req, res) {
         try {
             const userEraser = await User.FindOneAndDelete({ _id: req.params.userId });
@@ -45,9 +48,22 @@ module.exports = {
             res.status(500).json(err);
         }
     },
+    //adds friend to friends array in user schema
     async addFriend(req, res) {
         try {
-            const newFriend = await User.findOneAndUpdate({ _id: req.params.userId}, { $addToSet: })
+            const newFriend = await User.findOneAndUpdate({ _id: req.params.userId}, { $addToSet: {friends: req.params.friendId }}, { new: true});
+            res.json(newFriend);
+        } catch (err) {
+            res.status(500).json(err);
+        }
+        },
+        //removes friends from array in user schema
+    async removeFriend(req, res) {
+        try {
+            const removeFriends = await User.findOneAndUpdate({_id: req.params.userId}, { $pull: { friends: req.params.friendId }}, { new: true });
+            res.json(removeFriends);
+        } catch (err) {
+            res.status(500).json(err);
         }
     }
-} 
+};
