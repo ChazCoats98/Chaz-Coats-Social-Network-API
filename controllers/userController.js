@@ -43,7 +43,7 @@ module.exports = {
     async deleteUser(req, res) {
         try {
             const userEraser = await User.FindOneAndDelete({ _id: req.params.userId });
-            res.json(userEraser);
+            res.json({ message: "User deleted"});
         } catch (err) {
             res.status(500).json(err);
         }
@@ -61,7 +61,7 @@ module.exports = {
     async removeFriend(req, res) {
         try {
             const removeFriends = await User.findOneAndUpdate({_id: req.params.userId}, { $pull: { friends: req.params.friendId }}, { new: true });
-            res.json(removeFriends);
+            res.json({ message: "friend removed"});
         } catch (err) {
             res.status(500).json(err);
         }
