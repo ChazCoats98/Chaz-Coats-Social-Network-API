@@ -13,6 +13,7 @@ router.route('/').get(getUsers).post(newUser);
 
 router.route('/:userId').get(getOneUser).put(updateUser).delete(deleteUser);
 
+//adds or removes friend based on the user id and friend id
 router.route('/:userId/friends/:friendId').post(addFriend).delete(removeFriend);
 
 module.exports = router;

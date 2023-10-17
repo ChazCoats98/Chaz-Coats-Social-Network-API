@@ -42,10 +42,11 @@ module.exports = {
     //deletes user 
     async deleteUser(req, res) {
         try {
-            const userEraser = await User.FindOneAndDelete({ _id: req.params.userId });
+            const userEraser = await User.findOneAndDelete({ _id: req.params.userId });
             res.json({ message: "User deleted"});
         } catch (err) {
             res.status(500).json(err);
+            console.log(err);
         }
     },
     //adds friend to friends array in user schema
