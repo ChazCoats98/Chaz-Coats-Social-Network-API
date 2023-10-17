@@ -13,6 +13,9 @@
   ## Description
   This project was made as an API to connect to a front end social media site. Similar to twitter, users can post thoughts that other users can see and react to. 
 
+  ## Problems and Lessons
+  Although I was able to get most of the API functioning I still have an issue deleting items. Even when I delete them they still appear when you query the database for all users, posts, etc. The date created function also isn't formatted correctly.
+
   ## Installation
   Clone the repository from github and run npm i
 
@@ -27,6 +30,8 @@
 
   ## Tests
   N/A
+
+  ## Demonstration
 
   ## Questions
   To view my GitHub profile, visit [GitHub] (https://github.com/ChazCoats98).
